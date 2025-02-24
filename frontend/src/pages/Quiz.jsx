@@ -61,7 +61,7 @@ const Quiz = () => {
     const [score, setScore] = useState(null);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/quiz")
+        axios.get("https://quiz-react-app-backend.vercel.app/quiz")
             .then(res => setQuestions(res.data))
             .catch(err => console.log(err));
     }, []);

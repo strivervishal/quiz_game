@@ -76,7 +76,7 @@ const Quiz = () => {
     };
 
     const submitAnswers = () => {
-        axios.post("http://localhost:5000/api/quiz/submit", { answers })
+        axios.post("https://quiz-react-app-backend.vercel.app/quiz/submit", { answers })
             .then(res => setScore(res.data.score))
             .catch(err => console.log(err));
     };

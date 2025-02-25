@@ -67,10 +67,13 @@ const sampleQuestions = [
 
 const seedDB = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/mern_quiz", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(
+      process.env.MONGODB_URI || "mongodb://localhost:27017/mern_quiz",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
     console.log("Connected to MongoDB for seeding");
 
     // Remove existing questions (if needed)

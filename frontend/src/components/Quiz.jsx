@@ -1,3 +1,4 @@
+// frontend/src/components/Quiz.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,9 +9,12 @@ function Quiz() {
   const [answers, setAnswers] = useState({});
   const navigate = useNavigate();
 
+  // Use the deployed backend URL:
+  const API_URL = "https://quiz-game-pqvn.vercel.app";
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/questions")
+      .get(`${API_URL}/api/questions`)
       .then((res) => {
         setQuestions(res.data);
       })
@@ -35,7 +39,7 @@ function Quiz() {
     }));
 
     try {
-      const res = await axios.post("http://localhost:5000/api/submit", {
+      const res = await axios.post(`${API_URL}/api/submit`, {
         answers: formattedAnswers,
       });
       navigate("/result", { state: res.data });

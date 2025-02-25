@@ -16,6 +16,7 @@ app.use(
   cors({
     origin: "https://quiz-game-one-iota.vercel.app/",
     methods: "GET,POST",
+     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true, // If you're using cookies or authentication
   })
 );

@@ -7,13 +7,7 @@ import quizRoutes from "./routes/quiz.js";
 const app = express();
 
 // Middlewares
-app.use(
-  cors({
-    origin: "https://quiz-game-one-iota.vercel.app",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true, // If you're using cookies or authentication
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB (adjust the URI if needed)

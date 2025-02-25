@@ -10,7 +10,7 @@ function Quiz() {
 
   useEffect(() => {
     axios
-      .get("https://quiz-game-pqvn.vercel.app/api/questions")
+      .get("http://localhost:5000/api/questions")
       .then((res) => {
         setQuestions(res.data);
       })
@@ -35,12 +35,9 @@ function Quiz() {
     }));
 
     try {
-      const res = await axios.post(
-        "https://quiz-game-pqvn.vercel.app/api/submit",
-        {
-          answers: formattedAnswers,
-        }
-      );
+      const res = await axios.post("http://localhost:5000/api/submit", {
+        answers: formattedAnswers,
+      });
       navigate("/result", { state: res.data });
     } catch (err) {
       console.error("Error submitting quiz:", err);

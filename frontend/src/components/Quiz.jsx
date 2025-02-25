@@ -10,7 +10,7 @@ function Quiz() {
   const navigate = useNavigate();
 
   // Use the deployed backend URL:
-  const API_URL = "https://quiz-game-pqvn.vercel.app";
+  const API_URL = "https://quiz-game-pqvn.vercel.app/";
 
   useEffect(() => {
     axios

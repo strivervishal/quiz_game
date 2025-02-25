@@ -1,116 +1,29 @@
-// import express from "express";
-// import cors from "cors";
-// import mongoose from "mongoose";
-// import dotenv from "dotenv";
-
-
-
-// dotenv.config();
-
-// import quizRoutes from "./routes/quizRoutes.js";
-
-// const app = express();
-// // app.use(cors());
-// // CORS Configuration
-// const corsOptions = {
-//   origin: "https://portfolio-web-mern-frontend.vercel.app", // Your frontend domain
-//   methods: "GET,POST,PUT,DELETE", // Allow specific HTTP methods
-//   allowedHeaders: "Content-Type,Authorization", // Allow specific headers
-// };
-
-
-// app.use(express.json());
-
-
-
-// mongoose.connect(process.env.MONGO_URI)
-//   .then(() => console.log("✅ Connected to MongoDB Atlas"))
-//   .catch(err => console.log("❌ MongoDB Connection Error:", err));
-
-
-
-//   app.use("/api/quiz", quizRoutes);
-//   app.use(cors(corsOptions));
-// app.listen(5000, () => console.log("🚀 Server running on port 5000"));
-
-
-
-// import express from "express";
-// import cors from "cors";
-// import mongoose from "mongoose";
-// import dotenv from "dotenv";
-
-// dotenv.config();
-
-// import quizRoutes from "./routes/quizRoutes.js";
-
-// const app = express();
-
-// // CORS Configuration
-// const corsOptions = {
-//   origin: "https://portfolio-web-mern-frontend.vercel.app", // Your frontend domain
-//   methods: "GET,POST,PUT,DELETE", // Allowed HTTP methods
-//   allowedHeaders: "Content-Type,Authorization", // Allowed headers
-// };
-
-// app.use(cors(corsOptions)); // CORS should be used before routes
-// app.use(express.json());
-
-// mongoose
-//   .connect(process.env.MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log("✅ Connected to MongoDB Atlas"))
-//   .catch((err) => {
-//     console.error("❌ MongoDB Connection Error:", err);
-//     process.exit(1); // Exit process if DB connection fails
-//   });
-
-// app.use("/api/quiz", quizRoutes);
-
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
-
+// backend/server.js
 import express from "express";
-import cors from "cors";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-import quizRoutes from "./routes/quizRoutes.js";
+import cors from "cors";
+import quizRoutes from "./routes/quiz.js";
 
 const app = express();
 
-// CORS Configuration
-const corsOptions = {
-  origin: "https://quiz-react-app-frntend.vercel.app", // Your frontend domain
-  methods: "GET,POST,PUT,DELETE", // Allowed HTTP methods
-  allowedHeaders: "Content-Type,Authorization", // Allowed headers
-};
-
-app.use(cors(corsOptions)); // CORS should be used before routes
+// Middlewares
+app.use(cors());
 app.use(express.json());
 
+// Connect to MongoDB (adjust the URI if needed)
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect("mongodb://localhost:27017/mern_quiz", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("✅ Connected to MongoDB Atlas"))
-  .catch((err) => {
-    console.error("❌ MongoDB Connection Error:", err);
-    process.exit(1); // Exit process if DB connection fails
-  });
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-app.use("/api/quiz", quizRoutes);
+// API Routes
+app.use("/api", quizRoutes);
 
-// New message route
-app.get("/", (req, res) => {
-  res.json({ message: "Hello, this is your message API!" });
-});
-
+// Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

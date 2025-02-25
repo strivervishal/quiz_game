@@ -86,7 +86,7 @@ const app = express();
 
 // CORS Configuration
 const corsOptions = {
-  origin: "*", // Your frontend domain
+  origin: "https://quiz-react-app-frntend.vercel.app", // Your frontend domain
   methods: "GET,POST,PUT,DELETE", // Allowed HTTP methods
   allowedHeaders: "Content-Type,Authorization", // Allowed headers
 };
